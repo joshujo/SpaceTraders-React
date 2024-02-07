@@ -1,0 +1,11 @@
+.loginPanel {
+    border: 2px solid gray;
+    padding: 10px;
+    margin: auto;
+    width: 50%;
+    min-width: 500px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
