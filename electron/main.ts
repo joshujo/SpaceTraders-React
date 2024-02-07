@@ -24,7 +24,14 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
-  })
+    width: 1200,
+    height: 800,
+    minWidth: 800,
+    minHeight: 600
+  });
+
+  win.maximize()
+
 
   // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {
@@ -56,5 +63,6 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
 
 app.whenReady().then(createWindow)

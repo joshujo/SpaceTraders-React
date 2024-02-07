@@ -6,7 +6,13 @@ function LogOut() {
     }
     return (
         <div>
-            <button onClick={logOut}>Log Out</button>
+            <button onClick={logOut}
+            style={{
+                position: 'absolute',
+                bottom: '0',
+                left: '0',
+            }}
+            >Log Out</button>
         </div>
     );
 }

@@ -18,7 +18,6 @@ async function test(token: string) {
         }
 
       } catch (error) {
-        console.error('Error:', error);
         return false;
       }
 }

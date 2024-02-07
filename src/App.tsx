@@ -23,7 +23,7 @@ function App() {
   )
   } else {
     return (
-      <Main token={token} />
+        <Main token={token} />
     )
   }
 }

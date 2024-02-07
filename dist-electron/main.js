@@ -10,8 +10,13 @@ function createWindow() {
     icon: path.join(process.env.VITE_PUBLIC, "electron-vite.svg"),
     webPreferences: {
       preload: path.join(__dirname, "preload.js")
-    }
+    },
+    width: 1200,
+    height: 800,
+    minWidth: 800,
+    minHeight: 600
   });
+  win.maximize();
   win.webContents.on("did-finish-load", () => {
     win == null ? void 0 : win.webContents.send("main-process-message", (/* @__PURE__ */ new Date()).toLocaleString());
   });

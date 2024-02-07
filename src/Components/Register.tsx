@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import '../CSS_Modules/module.register.css';
+import register from "../ApiCalls/register";
 
 const Register = () => { 
     const [symbol, setSymbol] = useState('');
@@ -22,11 +23,15 @@ const Register = () => {
         console.log(faction);
     }, [faction]);
 
+    const handleSumit = async (event: any) => {
+        event.preventDefault();
+        await register(symbol, faction);
+    }
 
     return (
         <div className='registrationPanel'>
             <h1>SpaceTraders</h1>
-            <form>
+            <form onSubmit={handleSumit}>
                 <label htmlFor="symbol">Symbol: </label>
                 <input type="text" 
                 id="symbol" 
@@ -43,6 +48,8 @@ const Register = () => {
                 <br />
                 <label htmlFor="RememberMe">Remember me? </label>
                 <input type="checkbox" id="RememberMe" name="RememberMe"></input>
+                <br />
+                <button type="submit">Register</button>
             </form>
         </div>
     )
