@@ -1,14 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Test from '../ApiCalls/test';
 import '../CSS_Modules/module.logIn.css';
 import Register from './Register';
 import Modal from 'react-modal';
 
-function LogIn() {
+function LogIn({ setIsAuthenticated }: { setIsAuthenticated: any }) {
 
   const savedToken = sessionStorage.getItem('token');
   const [token, setToken] = useState(savedToken || '');
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  },
+  [])
+    
 
   const handleChange = (event: any) => {
     event.preventDefault();
@@ -20,11 +35,12 @@ function LogIn() {
 
     if (await Test(token)) {
       sessionStorage.setItem('token', token);
-      window.location.reload();
+      // window.location.reload();
       const rememberMeCheckbox = document.getElementById('RememberMe') as HTMLInputElement;
       if (rememberMeCheckbox?.checked) {
         localStorage.setItem('token', token);
       }
+      setIsAuthenticated(true);
     } else {
       console.log('Failure');
     }
@@ -38,6 +54,11 @@ function LogIn() {
 
   const closeModal = () => {
     setModalIsOpen(false);
+  }
+
+  const handleRegister = (token: string) => {
+    setToken(token);
+    setIsAuthenticated(true);
   }
 
   return (
@@ -64,19 +85,36 @@ function LogIn() {
         contentLabel="Register"
         style={{
           overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.5)'
+            backgroundColor: 'rgba(25, 34, 48, 0.5)'
           },
           content: {
             width: '800px',
             height: '300px',
             margin: 'auto',
-            backgroundColor: '#252847',
+            backgroundColor: '#192230',
             borderRadius: '10px',
-          }
+}
         }}
+        {...(isMobile && {style: {
+          content: {
+            width: '80%',
+            height: '300px',
+            margin: 'auto',
+            backgroundColor: '#192230',
+            borderRadius: '10px',
+            ...(isMobile && {
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }),
+          }
+        
+        }})}
       >
         <button onClick={closeModal}>Close</button>
-        <Register />
+        <Register 
+          handleRegister={() => handleRegister(token)}
+        />
       </Modal>
 
     </div>

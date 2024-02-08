@@ -1,18 +1,26 @@
-function LogOut() {
+type LogOutProps = {
+    onLogout: () => void;
+};
+
+function LogOut({ onLogout }: LogOutProps) {
     function logOut() {
         sessionStorage.clear();
         localStorage.clear();
-        window.location.reload();
+        onLogout(); // Call the callback function to notify the parent component
     }
+
     return (
         <div>
-            <button onClick={logOut}
-            style={{
-                position: 'absolute',
-                bottom: '0',
-                left: '0',
-            }}
-            >Log Out</button>
+            <button
+                onClick={logOut}
+                style={{
+                    position: 'absolute',
+                    bottom: '0',
+                    left: '0',
+                }}
+            >
+                Log Out
+            </button>
         </div>
     );
 }

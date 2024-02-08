@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import '../CSS_Modules/module.register.css';
 import register from "../ApiCalls/register";
 
-const Register = () => { 
+const Register = ({ handleRegister }: { handleRegister: () => void }) => {
     const [symbol, setSymbol] = useState('');
 
     const handleChange = (event: any) => {
@@ -23,15 +23,15 @@ const Register = () => {
         console.log(faction);
     }, [faction]);
 
-    const handleSumit = async (event: any) => {
+    const handleSubmit = async (event: any) => {
         event.preventDefault();
-        await register(symbol, faction);
+        await register(symbol, faction) ? handleRegister() : null;
     }
 
     return (
         <div className='registrationPanel'>
             <h1>SpaceTraders</h1>
-            <form onSubmit={handleSumit}>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="symbol">Symbol: </label>
                 <input type="text" 
                 id="symbol" 

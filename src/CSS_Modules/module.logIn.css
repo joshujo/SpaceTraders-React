@@ -9,3 +9,11 @@
     flex-direction: column;
     justify-content: center;
 }
+
+@media screen and (max-width: 600px) {
+    .loginPanel {
+        width: 95%;
+        min-width: 300px;
+    }
+    
+}

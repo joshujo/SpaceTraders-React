@@ -16,11 +16,11 @@ async function register(symbol: string, faction: string) {
 
         if (data.hasOwnProperty('data')) {
             sessionStorage.setItem('token', data.data.token);
-            window.location.reload();
             const rememberMeCheckbox = document?.getElementById('RememberMe') as HTMLInputElement;
             if (rememberMeCheckbox?.checked === true) {
                 localStorage.setItem('token', data.data.token);
             }
+            return true;
         } else {
             return false;
         }

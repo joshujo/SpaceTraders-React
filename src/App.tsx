@@ -7,25 +7,71 @@ import Main from './Components/Main'
 Modal.setAppElement('#root')
 
 function App() {
-  const savedLogin = localStorage.getItem('token')
+//   const savedLogin = localStorage.getItem('token')
 
-  if (savedLogin) {
-    sessionStorage.setItem('token', savedLogin)
-  }
+//   if (savedLogin) {
+//     sessionStorage.setItem('token', savedLogin)
+//   }
 
-  const isLoggedIn = sessionStorage.getItem('token') ? true : false;
-  const token = sessionStorage.getItem('token')
-  const [login, setLogin] = useState(isLoggedIn)
+//   const isLoggedIn = sessionStorage.getItem('token') ? true : false;
+//   const token = sessionStorage.getItem('token')
+//   const [login, setLogin] = useState(token ? true : false)
 
-  if (!login) {
-  return (
-    <LogIn />
-  )
+//  const checkLogin = () => {
+//     setLogin(true)
+//  }
+
+//  const logOutConfirm = () => {
+//     setLogin(false)
+//   }
+
+//   if (!isLoggedIn || !login) {
+//   return (
+//     <LogIn 
+//     onSend={checkLogin}
+    
+//     />
+//   )
+//   } else {
+//     return (
+//         <Main token={token} 
+//         logOutConfirm={logOutConfirm} />
+//     )
+//   }
+// }
+
+const [isAuthenticated, setIsAuthenticated] = useState(false)
+const [token, setToken] = useState('')
+
+useEffect(() => {
+  if (!token) {
+    sessionStorage.removeItem('token')
+    localStorage.removeItem('token')
+    setIsAuthenticated(false)
   } else {
-    return (
-        <Main token={token} />
-    )
+    sessionStorage.setItem('token', token)
+    localStorage.setItem('token', token)
+    setIsAuthenticated(true)
   }
+}, [token])
+
+useEffect(() =>{
+  setToken(sessionStorage.getItem('token') ?? localStorage.getItem('token') ?? '')
+  if (token) {
+    setIsAuthenticated(true)
+  }
+
+})
+
+const handleLogOut = () => {
+  setToken('')
+  setIsAuthenticated(false)
+}
+
+return (
+  isAuthenticated  ? <Main handleLogOut={handleLogOut} /> : <LogIn setIsAuthenticated={setIsAuthenticated} />
+)
+
 }
 
 export default App

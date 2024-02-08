@@ -1,15 +1,19 @@
-import Modal from 'react-modal';
-import { useState, useEffect } from 'react';
 import LogOut from './SubComponents/LogOut';
 import InfoPanel from './InfoPanel';
+import Content from './Content';
 
-function Main({token} : {token: any}) {
+
+function Main({ handleLogOut }: { handleLogOut: any }) {
+
     
     return (
         <>
             <h1>SpaceTraders</h1>
-            <LogOut />
+            <LogOut 
+            onLogout={handleLogOut}
+            />
             <InfoPanel />
+            <Content />
         </>
     )
 }
