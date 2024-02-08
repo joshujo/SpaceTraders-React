@@ -41,7 +41,7 @@ function App() {
 // }
 
 const [isAuthenticated, setIsAuthenticated] = useState(false)
-const [token, setToken] = useState('')
+const [token, setToken] = useState(sessionStorage.getItem('token') ?? localStorage.getItem('token') ?? '')
 
 useEffect(() => {
   if (!token) {
