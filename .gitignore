@@ -128,3 +128,8 @@ dist
 
 # Release folder
 release/
+
+#dist folder
+dist-electron/
+dist-electron/main.js
+dist-electron/preload.js
