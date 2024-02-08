@@ -27,7 +27,17 @@ import '../CSS_Modules/module.infoPanel.css';
     }, []);
 
     function copyToken() {
-        navigator.clipboard.writeText(token);
+        const tokenToCopy = token;
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(tokenToCopy);
+        } else {
+            const textArea = document.createElement('textarea');
+            textArea.value = tokenToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+        }
     }
 
     return (
