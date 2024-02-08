@@ -45,9 +45,6 @@ const [token, setToken] = useState('')
 
 useEffect(() => {
   if (!token) {
-    sessionStorage.removeItem('token')
-    localStorage.removeItem('token')
-    setIsAuthenticated(false)
   } else {
     sessionStorage.setItem('token', token)
     localStorage.setItem('token', token)
