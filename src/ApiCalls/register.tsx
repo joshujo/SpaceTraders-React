@@ -19,6 +19,17 @@ async function register(symbol: string, faction: string) {
             const rememberMeCheckbox = document?.getElementById('RememberMe') as HTMLInputElement;
             if (rememberMeCheckbox?.checked === true) {
                 localStorage.setItem('token', data.data.token);
+          
+                const obj = {
+                  symbol: symbol,
+                  token: data.data.token,
+                }
+          
+                const existingUsers = localStorage.getItem('users');
+                const users = existingUsers ? JSON.parse(existingUsers) : [];
+                users.push(obj);
+                localStorage.setItem('users', JSON.stringify(users));
+
             }
             return true;
         } else {

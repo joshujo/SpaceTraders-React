@@ -61,6 +61,7 @@ useEffect(() =>{
 })
 
 const handleLogOut = () => {
+  localStorage.removeItem('token')
   setToken('')
   setIsAuthenticated(false)
 }

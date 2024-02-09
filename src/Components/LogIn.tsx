@@ -3,6 +3,9 @@ import Test from '../ApiCalls/test';
 import '../CSS_Modules/module.logIn.css';
 import Register from './Register';
 import Modal from 'react-modal';
+import SwitchUser from './SwitchUser';
+import infopanel from '../ApiCalls/infopanel';
+
 
 function LogIn({ setIsAuthenticated }: { setIsAuthenticated: any }) {
 
@@ -39,8 +42,28 @@ function LogIn({ setIsAuthenticated }: { setIsAuthenticated: any }) {
       const rememberMeCheckbox = document.getElementById('RememberMe') as HTMLInputElement;
       if (rememberMeCheckbox?.checked) {
         localStorage.setItem('token', token);
+
+            const result = await infopanel(token);
+            const { data } = await result;
+            const { symbol } = await data;
+
+            const obj = {
+              symbol: symbol,
+              token: token,
+            }
+
+            const existingUsers = localStorage.getItem('users');
+            const users = existingUsers ? JSON.parse(existingUsers) : [];
+            users.push(obj);
+            localStorage.setItem('users', JSON.stringify(users));
+
       }
       setIsAuthenticated(true);
+
+      
+
+
+
     } else {
       console.log('Failure');
     }
@@ -62,6 +85,7 @@ function LogIn({ setIsAuthenticated }: { setIsAuthenticated: any }) {
   }
 
   return (
+    <>
     <div className='loginPanel'>
       <h1>SpaceTraders</h1>
       <form onSubmit={onSubmit}>
@@ -77,7 +101,11 @@ function LogIn({ setIsAuthenticated }: { setIsAuthenticated: any }) {
       <br />
       <input type="submit" value="Log In"></input>
       </form>
-      <p>Don't have an account? <a href="#" onClick={onRegister}>Register here</a></p>
+      <p
+      style={{
+        fontSize: '0.8em',
+      }}
+      >Don't have an account? <a href="#" onClick={onRegister}>Register here</a></p>
 
       <Modal
         isOpen={modalIsOpen}
@@ -116,8 +144,10 @@ function LogIn({ setIsAuthenticated }: { setIsAuthenticated: any }) {
           handleRegister={() => handleRegister(token)}
         />
       </Modal>
-
+        
     </div>
+    <SwitchUser />
+    </>
   );
 }
 

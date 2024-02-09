@@ -1,0 +1,34 @@
+.switchUserBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 100%;
+  background-color: #0f0909;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.switchUserBox h1 {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.switchUserContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 95%;
+  height: 500px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #16193a;
+  overflow-y: scroll;
+}
