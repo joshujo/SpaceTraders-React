@@ -1,8 +1,10 @@
+import Ships from './SubComponents/Ships';
+
 function Content() {
   return (
     <div>
       <h1>Content</h1>
-      <p>This is the content</p>
+      <Ships />
     </div>
   );
 }

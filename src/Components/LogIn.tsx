@@ -3,7 +3,6 @@ import Test from '../ApiCalls/test';
 import '../CSS_Modules/module.logIn.css';
 import Register from './Register';
 import Modal from 'react-modal';
-import SwitchUser from './SwitchUser';
 import infopanel from '../ApiCalls/infopanel';
 
 
@@ -146,7 +145,6 @@ function LogIn({ setIsAuthenticated }: { setIsAuthenticated: any }) {
       </Modal>
         
     </div>
-    <SwitchUser />
     </>
   );
 }

@@ -22,6 +22,14 @@
         font-size: 0.7em;
     }
   
+   
+
+    @media screen and (max-width: 950px){
+        .infoPanel {
+            display: none;
+        }
+    } 
+    
     @media screen and (max-width: 600px){
         .infoPanel {
             width: 90%;

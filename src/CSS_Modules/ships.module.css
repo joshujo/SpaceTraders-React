@@ -1,0 +1,18 @@
+.main_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 70vh;
+    background-color: #2c2a2a;
+    border: 3px solid #FFF;
+    border-radius: 10px;
+    width: 50vw;
+    min-width: 481px;
+}
+
+.title {
+    color: #FFF;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    align-self: center;
+}
